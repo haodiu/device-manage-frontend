@@ -81,6 +81,7 @@ const UserOrdersDetails = () => {
         gender: profile.gender,
         birthday: profile.birthday,
         address: profile.address,
+        avatar: profile.avatar,
       }),
     });
 
@@ -182,6 +183,7 @@ const UserOrdersDetails = () => {
                     alignItems: "center",
                   }}
                   onClick={() => {
+                    setProfile(user)
                     openUpdate();
                   }}
                 >
@@ -287,7 +289,7 @@ const UserOrdersDetails = () => {
                     id="inputPhone"
                     type="text"
                     placeholder="Số điện thoại"
-                    value={user.phone}
+                    value={profile.phone}
                     onChange={(e) => {
                       setProfile({
                         ...profile,
@@ -303,7 +305,7 @@ const UserOrdersDetails = () => {
                     id="inputCCCD"
                     type="text"
                     placeholder="CCCD"
-                    value={user.citizenId}
+                    value={profile.citizenId}
                     onChange={(e) => {
                       setProfile({
                         ...profile,
@@ -319,7 +321,7 @@ const UserOrdersDetails = () => {
                     id="inputName"
                     type="text"
                     placeholder="Tên"
-                    value={user.name}
+                    value={profile.name}
                     onChange={(e) => {
                       setProfile({
                         ...profile,
@@ -351,7 +353,7 @@ const UserOrdersDetails = () => {
                     id="inputBirthday"
                     type="text"
                     placeholder="Ngày sinh"
-                    value={user.birthday}
+                    value={profile.birthday}
                     onChange={(e) => {
                       setProfile({
                         ...profile,
@@ -367,11 +369,27 @@ const UserOrdersDetails = () => {
                     id="inputAddress"
                     type="text"
                     placeholder="Địa chỉ"
-                    value={user.address}
+                    value={profile.address}
                     onChange={(e) => {
                       setProfile({
                         ...profile,
                         address: e.target.value,
+                      });
+                    }}
+                  />
+                </Form.Group>
+
+                <Form.Group as={Row} className="mp-3">
+                  <Form.Label>Avatar</Form.Label>
+                  <Form.Control
+                    id="inputAvatar"
+                    type="text"
+                    placeholder="Link avatar"
+                    value={profile.avatar}
+                    onChange={(e) => {
+                      setProfile({
+                        ...profile,
+                        avatar: e.target.value,
                       });
                     }}
                   />

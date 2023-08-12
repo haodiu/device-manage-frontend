@@ -24,7 +24,7 @@ const Header = () => {
             <div className="col-2 shop ">
               <h4 className="shop-name">
                 <Link className="shop-name" to={"/"}>
-                  <div className="lezada button type3">HAZCorp</div>
+                  <div className="lezada button type3">ZACorp</div>
                 </Link>
               </h4>
             </div>

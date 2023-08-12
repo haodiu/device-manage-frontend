@@ -260,6 +260,7 @@ const ProductsManagement = () => {
               <Button variant="info" onClick={openAdd} className="btn-add">
                 Thêm thiết bị
               </Button>
+              
               <div className="select">
                 <select
                   className="form-select"

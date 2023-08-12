@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer>
       <span>
-        Copyright © 2023. LEZADA
+        Copyright © 2023. ZACorp
       </span>
     </footer>
   );

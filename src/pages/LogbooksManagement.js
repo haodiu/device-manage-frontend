@@ -24,8 +24,10 @@ const ProductsManagement = () => {
     "Đã từ chối",
     "Đang thực hiện",
     "Đã hoàn thành",
-    "Đã huỷ"
-  ]
+    "Đã huỷ",
+  ];
+
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   const [logbooksByType, setLogbooksByType] = React.useState([]);
   const [typeOfLogbook, setTypeOfLogbook] = React.useState("");
@@ -82,6 +84,7 @@ const ProductsManagement = () => {
   const recall = "Thu hồi";
   const replace = "Thay thế";
   const repair = "Sửa chữa";
+  // const types = [{all: "Tất cả", recall}]
 
   const SetLogbooksByType = (logbookType) => {
     if (logbookType !== all) {
@@ -92,12 +95,36 @@ const ProductsManagement = () => {
     }
   };
 
+  const handleSearch = () => {
+    searchDevice(searchTerm);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      setLogbooks(logbooks);
+      handleSearch();
+    }
+  };
+
+  const searchDevice = (searchTerm) => {
+    const searchedDevice =
+      searchTerm === ""
+        ? logbooks // Return all devices if search term is empty
+        : logbooksByType.filter((logbook) =>
+            logbook.deviceName.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+    if (searchTerm === "") {
+      window.location = "/logbooks";
+    }
+    setLogbooksByType(searchedDevice);
+  };
+
   return (
     <>
       <div className="main-panel">
         <div className="content-wrapper">
           <div className="act-top">
-          <div className="select">
+            <div className="select">
               <select
                 className="form-select"
                 id="select-option"
@@ -110,6 +137,28 @@ const ProductsManagement = () => {
                 <option value={replace}>{replace}</option>
                 <option value={repair}>{repair}</option>
               </select>
+            </div>
+
+            <div className="form-search" style={{ display: "flex", alignItems: "center" }}>
+              <input style={{paddingLeft: "10px"}}
+                className="form-search-input"
+                type="text"
+                placeholder="Nhập tên thiết bị..."
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={handleKeyPress}
+              />
+              <span>
+                <Button
+                  className="btn-add"
+                  variant="info"
+                  onClick={() => {
+                    setLogbooks(logbooks);
+                    searchDevice(searchTerm);
+                  }}
+                >
+                  Tìm kiếm
+                </Button>
+              </span>
             </div>
           </div>
           <div className="card">
@@ -124,9 +173,9 @@ const ProductsManagement = () => {
                     <th style={{ width: "100px" }}>Loại yêu cầu</th>
                     <th style={{ width: "140px" }}>Mô tả</th>
                     <th style={{ width: "90px" }}>Trạng thái</th>
-                    <th style={{ width: "180px"}}>Xác nhận của người dùng</th>
-                    <th style={{width: "70px"}}>Ngày tạo</th>
-                    <th style={{width: "120px"}}>Ngày cập nhật</th>
+                    <th style={{ width: "180px" }}>Xác nhận của người dùng</th>
+                    <th style={{ width: "70px" }}>Ngày tạo</th>
+                    <th style={{ width: "120px" }}>Ngày cập nhật</th>
                     <th style={{}}>Cập nhật trạng thái</th>
                   </tr>
                 </thead>
@@ -150,8 +199,10 @@ const ProductsManagement = () => {
                       <td>{logbook.status}</td>
                       <td>{logbook.confirmedDescription}</td>
                       <td>{getDate(logbook.createdAt)}</td>
-                      <td style={{paddingLeft: '25px'}}>{getDate(logbook.updatedAt)}</td>
-                      <td style={{paddingLeft: '34px'}}>
+                      <td style={{ paddingLeft: "25px" }}>
+                        {getDate(logbook.updatedAt)}
+                      </td>
+                      <td style={{ paddingLeft: "34px" }}>
                         <button
                           style={{ width: "80px" }}
                           className="btn-update"
