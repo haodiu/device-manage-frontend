@@ -1,5 +1,5 @@
 # web-ts-reactjs
-# setup
+## setup
 npm install
-# run
+## run
 npm start
