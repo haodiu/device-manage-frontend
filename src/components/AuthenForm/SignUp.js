@@ -30,18 +30,19 @@ const Signup = ({ submitForm }) => {
           res.json().then((data) => {
             if (res.ok) {
               alert("Đăng kí tài khoản thành công");
+              window.location = "/login";
+            } else if (res.status === 422) {
+              alert('Email cần đúng định dạng. Mật khẩu 6-40 ký tự!')
             } else {
-              if (data.error.includes("users.username")) {
-                setStatus("Email đã tồn tại");
-              }
+              alert("Đăng ký không thành công");
             }
           });
         })
         .catch((err) => {
+          alert("Đăng ký không thành công");
           console.log(err);
         });
     }
-    window.location = '/login';
   };
   const checkPassword = (v) => {
     if (password !== password) {
@@ -59,7 +60,7 @@ const Signup = ({ submitForm }) => {
       </div>
       <div className="form-content-right">
         <form className="form">
-        <h1 style={{color: "#000"}}>Đăng ký</h1>
+          <h1 style={{ color: "#000" }}>Đăng ký</h1>
           <div className="form-inputs">
             <label htmlFor="username" className="form-label">
               Email

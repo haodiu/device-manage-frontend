@@ -42,7 +42,6 @@ const ProductsManagement = () => {
 
   const [devicesByType, setDevicesByType] = React.useState([]);
 
-  //for update products
   const [deviceUpdate, setDeviceUpdate] = React.useState({});
 
   React.useEffect(() => {
@@ -256,11 +255,14 @@ const ProductsManagement = () => {
       <div className="main-panel">
         <div className="content-wrapper">
           <div className="act-top">
-            <div className="add-item" style={{ display: "flex", alignItems: "center" }}>
+            <div
+              className="add-item"
+              style={{ display: "flex", alignItems: "center" }}
+            >
               <Button variant="info" onClick={openAdd} className="btn-add">
                 Thêm thiết bị
               </Button>
-              
+
               <div className="select">
                 <select
                   className="form-select"
@@ -279,8 +281,12 @@ const ProductsManagement = () => {
               </div>
             </div>
 
-            <div className="form-search" style={{ display: "flex", alignItems: "center" }}>
-              <input style={{paddingLeft: "10px"}}
+            <div
+              className="form-search"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <input
+                style={{ paddingLeft: "10px" }}
                 className="form-search-input"
                 type="text"
                 placeholder="Nhập tên thiết bị..."

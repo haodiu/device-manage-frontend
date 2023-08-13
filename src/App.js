@@ -6,9 +6,6 @@ import Home from "./pages/Home";
 import Login from "./components/AuthenForm/Login";
 import ErrorPage from "./pages/ErrorPage";
 import DevicesManagement from "./pages/DevicesManagement";
-import UserOrdersDetails from "./pages/UserOrdersDetails";
-import InventoryManagement from "./pages/InventoryManagement"
-import ShippingPartnerManagement from "./pages/ShippingPartnerManagement"
 import LogbooksManagement from "./pages/LogbooksManagement"
 import Profile from "./pages/Profile"
 import UserDevices from "./pages/UserDevices"
@@ -24,9 +21,7 @@ function App() {
             <Route path="devices" element={<DevicesManagement />} />
             <Route path="logbooks" element={<LogbooksManagement />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="users/:id" element={<UserOrdersDetails />} />
             <Route path="user-devices" element={<UserDevices/>} />
-            <Route path="shipping" element={<ShippingPartnerManagement/>} />
             <Route path="login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<ErrorPage />} />

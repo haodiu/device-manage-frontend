@@ -1,6 +1,5 @@
 import React from "react";
-import { Button, Table, Modal, Form, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Button, Modal, Form, Row } from "react-bootstrap";
 
 const UserOrdersDetails = () => {
   const hostProfile = process.env.REACT_APP_HOST_PROFILE;
@@ -13,9 +12,6 @@ const UserOrdersDetails = () => {
   const [showUpdate, setUpdate] = React.useState(false);
   const closeUpdate = () => setUpdate(false);
   const openUpdate = () => setUpdate(true);
-
-  let params = useParams();
-
   const [userDetail] = React.useState(JSON.parse(localStorage.getItem("auth")));
 
   if (userDetail === null) {

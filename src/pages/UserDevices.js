@@ -12,10 +12,6 @@ const ProductsManagement = () => {
   const closeAdd = () => setShowAdd(false);
   const openAdd = () => setShowAdd(true);
 
-  const [showUpdate, setUpdate] = React.useState(false);
-  const closeUpdate = () => setUpdate(false);
-  const openUpdate = () => setUpdate(true);
-
   const [showDeviceLogbook, setStateDeviceLogbook] = React.useState(false);
   const closeDeviceLogbook = () => setStateDeviceLogbook(false);
   const openDeviceLogbook = () => setStateDeviceLogbook(true);
@@ -28,13 +24,10 @@ const ProductsManagement = () => {
     window.location = "/login";
   }
   const [devices, setDevices] = React.useState([]);
-  const [deviceUsers, setDeviceUsers] = React.useState([]);
   const [deviceTypes, setDeviceTypes] = React.useState([]);
   const [deviceLogbook, setDeviceLogbook] = React.useState({});
 
   const [logbookTypes, setLogbookTypes] = React.useState([]);
-
-  const [devicePost, setDevicePost] = React.useState({});
 
   const [logbookCreate, setLogbookCreate] = React.useState({});
 
@@ -376,7 +369,7 @@ const ProductsManagement = () => {
                       ? deviceLogbook.confirmedDescription
                       : "Chưa được xác nhận khi nhận thiết bị"
                   }
-                  readOnly={deviceLogbook.confirmed ? true : false}
+                  readOnly={deviceLogbook?.confirmed ? true : false}
                   onChange={(e) => setConfirmedDescription(e.target.value)}
                 />
               </Form.Group>

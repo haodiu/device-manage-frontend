@@ -1,5 +1,6 @@
 import React from "react";
-import ProductChart from "../components/charts/ProductChart";
+import DeviceChart from "../components/charts/DeviceChart";
+import LogbookChart from "../components/charts/LogbookChart"
 
 const Home = () => {
   const [userDetail] = React.useState(JSON.parse(localStorage.getItem("auth")));
@@ -14,7 +15,11 @@ const Home = () => {
             <div className="card-body">
               <div className="chart-container">
                 <div className="chart-info">
-                  <ProductChart />
+                  <DeviceChart />
+                </div>
+
+                <div className="chart-info">
+                  <LogbookChart />
                 </div>
               </div>
             </div>

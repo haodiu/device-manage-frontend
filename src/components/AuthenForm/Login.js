@@ -1,12 +1,11 @@
 import React, { useRef, useState } from "react";
 import "./Form.css";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Form } from "react-bootstrap";
 
 
 const Login = () => {
   const hostLogin = process.env.REACT_APP_HOST_LOGIN;
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState("");
@@ -31,9 +30,13 @@ const Login = () => {
       console.log(data);
       localStorage.setItem("auth", JSON.stringify(data));
       if (data.role === "maintenance_staff") {
-        window.location = '/devices';
+        window.location = '/';
       } else {
-        window.location = '/user-devices';
+        if (data.name) {
+          window.location = '/user-devices';
+        } else {
+          window.location = '/profile';
+        }
       }
     } else {
       setStatus("user not found!");

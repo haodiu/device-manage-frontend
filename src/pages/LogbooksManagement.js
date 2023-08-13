@@ -28,9 +28,7 @@ const ProductsManagement = () => {
   ];
 
   const [searchTerm, setSearchTerm] = React.useState("");
-
   const [logbooksByType, setLogbooksByType] = React.useState([]);
-  const [typeOfLogbook, setTypeOfLogbook] = React.useState("");
 
   React.useEffect(() => {
     fetch(hostLogbooks, {
