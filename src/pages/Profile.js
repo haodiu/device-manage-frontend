@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Modal, Form, Row } from "react-bootstrap";
-
 const UserOrdersDetails = () => {
   const hostProfile = process.env.REACT_APP_HOST_PROFILE;
   const hostUser = process.env.REACT_APP_HOST_USERS;
@@ -75,7 +74,7 @@ const UserOrdersDetails = () => {
         citizenId: profile.citizenId,
         name: profile.name,
         gender: profile.gender,
-        birthday: profile.birthday,
+        birthday: profile.birthday ? profile.birthday : undefined,
         address: profile.address,
         avatar: profile.avatar,
       }),
@@ -88,6 +87,8 @@ const UserOrdersDetails = () => {
     alert("Cập nhật thành công!");
     window.location = "/profile";
   };
+
+  const defaultAvatar = "https://cdn-icons-png.flaticon.com/512/3607/3607444.png"
 
   const Profile = ({
     name,
@@ -152,6 +153,13 @@ const UserOrdersDetails = () => {
     );
   };
 
+  const isInvalidCCCD = profile.citizenId?.length !== 12;
+  const isInvalidPhone = profile.phone?.length !== 10;
+  const isValidBirthday = (inputValue) => {
+    return /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[0-2])\/\d{4}$/.test(
+      inputValue
+    );
+  };
   return (
     <>
       <div className="main-panel">
@@ -167,7 +175,7 @@ const UserOrdersDetails = () => {
                   gender={user.gender}
                   birthday={user.birthday}
                   address={user.address}
-                  avatar={user.avatar}
+                  avatar={user.avatar? user.avatar : defaultAvatar}
                   role={user.role}
                 />
                 <div
@@ -179,7 +187,7 @@ const UserOrdersDetails = () => {
                     alignItems: "center",
                   }}
                   onClick={() => {
-                    setProfile(user)
+                    setProfile(user);
                     openUpdate();
                   }}
                 >
@@ -292,7 +300,13 @@ const UserOrdersDetails = () => {
                         phone: e.target.value,
                       });
                     }}
+                    isInvalid={isInvalidPhone}
                   />
+                  {isInvalidPhone && (
+                    <Form.Control.Feedback type="invalid">
+                      Số điện thoại phải gồm 10 chữ số
+                    </Form.Control.Feedback>
+                  )}
                 </Form.Group>
 
                 <Form.Group as={Row} className="mp-3">
@@ -308,7 +322,13 @@ const UserOrdersDetails = () => {
                         citizenId: e.target.value,
                       });
                     }}
+                    isInvalid={isInvalidCCCD}
                   />
+                  {isInvalidCCCD && (
+                    <Form.Control.Feedback type="invalid">
+                      CCCD phải gồm 12 chữ số.
+                    </Form.Control.Feedback>
+                  )}
                 </Form.Group>
 
                 <Form.Group as={Row} className="mp-3">
@@ -337,9 +357,15 @@ const UserOrdersDetails = () => {
                       })
                     }
                   >
-                    <option value={user.gender}>{user.gender === 'male' ? 'Nam':'Nữ'}</option>
-                    {user.gender !== 'male' && <option value={"male"}>Nam</option>}
-                    {user.gender !== 'female' && <option value={"female"}>Nữ</option>}
+                    <option value={user.gender}>
+                      {user.gender === "male" ? "Nam" : "Nữ"}
+                    </option>
+                    {user.gender !== "male" && (
+                      <option value={"male"}>Nam</option>
+                    )}
+                    {user.gender !== "female" && (
+                      <option value={"female"}>Nữ</option>
+                    )}
                   </Form.Select>
                 </Form.Group>
 
@@ -357,6 +383,11 @@ const UserOrdersDetails = () => {
                       });
                     }}
                   />
+                  {!isValidBirthday(profile.birthday) && (
+                    <Form.Text className="text-danger">
+                      Ngày sinh không hợp lệ. Sử dụng định dạng dd/mm/yyyy.
+                    </Form.Text>
+                  )}
                 </Form.Group>
 
                 <Form.Group as={Row} className="mp-3">

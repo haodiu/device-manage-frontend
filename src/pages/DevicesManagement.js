@@ -137,6 +137,7 @@ const ProductsManagement = () => {
       alert("Xoá thông tin thiết bị thất bại");
       throw new Error("Xoá thiết bị thất bại");
     }
+    alert('Đã xoá thiết bị')
     window.location = "/devices";
   };
 
@@ -161,6 +162,7 @@ const ProductsManagement = () => {
     });
 
     if (!response.ok) {
+      alert('Cập nhật thiết bị không thành công')
       throw new Error("Cập nhật thiết bị không thành công");
     }
     alert("Cập nhật thành công");
@@ -248,6 +250,12 @@ const ProductsManagement = () => {
       window.location = "/devices";
     }
     setDevicesByType(searchedDevice);
+  };
+
+  const isValidDate = (inputValue) => {
+    return /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[0-2])\/\d{4}$/.test(
+      inputValue
+    );
   };
 
   return (
@@ -497,6 +505,11 @@ const ProductsManagement = () => {
                       })
                     }
                   />
+                  {!isValidDate(devicePost.purchaseDate) && (
+                    <Form.Text className="text-danger">
+                      Ngày đặt không hợp lệ. Sử dụng định dạng dd/mm/yyyy.
+                    </Form.Text>
+                  )}
                 </Form.Group>
 
                 <Form.Group as={Row} className="mp-3">
@@ -526,7 +539,7 @@ const ProductsManagement = () => {
                   >
                     <option value={null}>{""}</option>
                     {deviceUsers?.map((deviceUser) => (
-                      <option key={deviceUser.id} value={deviceUser.id}>
+                      deviceUser.name && <option key={deviceUser.id} value={deviceUser.id}>
                         {deviceUser.name}
                       </option>
                     ))}
@@ -614,6 +627,11 @@ const ProductsManagement = () => {
                       });
                     }}
                   />
+                  {!isValidDate(deviceUpdate.purchaseDate) && (
+                    <Form.Text className="text-danger">
+                      Ngày đặt không hợp lệ. Sử dụng định dạng dd/mm/yyyy.
+                    </Form.Text>
+                  )}
                 </Form.Group>
 
                 <Form.Group as={Row} className="mp-3">
@@ -664,7 +682,7 @@ const ProductsManagement = () => {
                     {deviceUsers?.map(
                       (deviceUser) =>
                         deviceUser.name !== deviceUpdate.user?.name && (
-                          <option key={deviceUser.id} value={deviceUser.id}>
+                          deviceUser.name && <option key={deviceUser.id} value={deviceUser.id}>
                             {deviceUser.name}
                           </option>
                         )
