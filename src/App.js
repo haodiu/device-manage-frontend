@@ -10,6 +10,7 @@ import LogbooksManagement from "./pages/LogbooksManagement"
 import Profile from "./pages/Profile"
 import UserDevices from "./pages/UserDevices"
 import Signup from "./components/AuthenForm/SignUp";
+import LiquidationsManagement from "./pages/LiquidationManage"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="devices" element={<DevicesManagement />} />
             <Route path="logbooks" element={<LogbooksManagement />} />
+            <Route path="liquidations" element={<LiquidationsManagement />} />
             <Route path="profile" element={<Profile />} />
             <Route path="user-devices" element={<UserDevices/>} />
             <Route path="login" element={<Login />} />

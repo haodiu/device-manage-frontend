@@ -34,8 +34,8 @@ const Header = () => {
                 )}
                 {userDetail?.role === "device_user" && (
                   <Link className="shop-name" to={"/"} onClick={disableClick}>
-                  <div className="lezada button type3">ZACorp</div>
-                </Link>
+                    <div className="lezada button type3">ZACorp</div>
+                  </Link>
                 )}
               </h4>
             </div>
@@ -58,6 +58,20 @@ const Header = () => {
                 <div className="btn-cont">
                   <a href="/logbooks" className="btn">
                     YÊU CẦU BẢO TRÌ
+                    <span className="line-1"></span>
+                    <span className="line-2"></span>
+                    <span className="line-3"></span>
+                    <span className="line-4"></span>
+                  </a>
+                </div>
+              </div>
+            )}
+
+            {userDetail?.role === "maintenance_staff" && (
+              <div className="col-1 nav-option">
+                <div className="btn-cont">
+                  <a href="/liquidations" className="btn">
+                    ĐỀ XUẤT THANH LÝ
                     <span className="line-1"></span>
                     <span className="line-2"></span>
                     <span className="line-3"></span>
