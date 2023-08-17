@@ -29,23 +29,23 @@ const ProductChart = () => {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
-  const label = logbookTypeCount.map(item => item.typeName);
-  const data = logbookTypeCount.map(item => item.amount);
+  const label = logbookTypeCount?.map(item => item.typeName);
+  const data = logbookTypeCount?.map(item => item.amount);
   const chartData = {
     labels: label,
     datasets: [
       {
         label: "Số lượng",
         data: data,
-        backgroundColor: logbookTypeCount.map(() => getRandomColor(0.2)),
-        borderColor: logbookTypeCount.map(() => getRandomColor(1)),
+        backgroundColor: logbookTypeCount?.map(() => getRandomColor(0.2)),
+        borderColor: logbookTypeCount?.map(() => getRandomColor(1)),
         borderWidth: 1,
       },
     ],
   };
 
   let total = 0;
-  for (let i = 0; i < logbookTypeCount.length; i++) {
+  for (let i = 0; i < logbookTypeCount?.length; i++) {
     total = total + logbookTypeCount[i].amount;
   }
   return (

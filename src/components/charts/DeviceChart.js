@@ -29,23 +29,23 @@ const DeviceChart = () => {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
-  const label = deviceTypeCount.map(item => item.typeName);
-  const data = deviceTypeCount.map(item => item.amount);
+  const label = deviceTypeCount?.map(item => item.typeName);
+  const data = deviceTypeCount?.map(item => item.amount);
   const chartData = {
     labels: label,
     datasets: [
       {
         label: "Số lượng",
         data: data,
-        backgroundColor: deviceTypeCount.map(() => getRandomColor(0.2)),
-        borderColor: deviceTypeCount.map(() => getRandomColor(1)),
+        backgroundColor: deviceTypeCount?.map(() => getRandomColor(0.2)),
+        borderColor: deviceTypeCount?.map(() => getRandomColor(1)),
         borderWidth: 1,
       },
     ],
   };
 
   let total = 0;
-  for (let i = 0; i < deviceTypeCount.length; i++) {
+  for (let i = 0; i < deviceTypeCount?.length; i++) {
     total = total + deviceTypeCount[i].amount;
   }
   return (
