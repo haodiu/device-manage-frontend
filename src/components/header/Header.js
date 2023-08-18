@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 const Header = () => {
   const [userDetail, setUserDetail] = React.useState(
     JSON.parse(localStorage.getItem("auth"))
   );
+
 
   const Signout = () => {
     try {
@@ -128,6 +130,9 @@ const Header = () => {
           </div>
         </div>
       </header>
+
+      <style>
+</style>
     </>
   );
 };

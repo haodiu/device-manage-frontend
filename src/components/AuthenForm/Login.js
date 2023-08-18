@@ -52,7 +52,7 @@ const Login = () => {
   return (
     <div className="form-container">
       <div className="form-content-left">
-        <img src="img/admin.png" alt="spaceship" className="form-img" />
+        <img style={{width: '500px'}} src="img/maintenance.png" alt="spaceship" className="form-img" />
       </div>
       <div className="form-content-right">
         <form className="form">

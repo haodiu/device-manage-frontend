@@ -23,6 +23,10 @@ const ProductsManagement = () => {
   const closeDeviceLogbooks = () => setStateDeviceLogbooks(false);
   const openDeviceLogbooks = () => setStateDeviceLogbooks(true);
 
+  const [showDeviceType, setStateDeviceType] = React.useState(false);
+  const closeDeviceType = () => setStateDeviceType(false);
+  const openDeviceType = () => setStateDeviceType(true);
+
   const [searchTerm, setSearchTerm] = React.useState("");
 
   const [userDetail] = React.useState(JSON.parse(localStorage.getItem("auth")));
@@ -43,6 +47,10 @@ const ProductsManagement = () => {
   const [devicesByType, setDevicesByType] = React.useState([]);
 
   const [deviceUpdate, setDeviceUpdate] = React.useState({});
+
+  const [deviceId, setDeviceId] = React.useState(Number);
+
+  const [deviceType, setDeviceType] = React.useState({});
 
   React.useEffect(() => {
     fetch(hostDevices, {
@@ -121,6 +129,32 @@ const ProductsManagement = () => {
     closeAdd();
     window.location = "/devices";
     alert("Đã thêm thiết bị thành công!");
+  };
+
+  const createDeviceType = async () => {
+
+    const response = await fetch(hostDevices + 'device-type', {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + userDetail.accessToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: deviceType,
+      }),
+    });
+
+    if (!response.ok) {
+      alert("Thêm loại thiết bị không thành công!");
+      closeAdd();
+      throw new Error("Thêm loại thiết bị không thành công");
+    }
+    const res = await response.json();
+    console.log(res.result.data);
+
+    closeAdd();
+    window.location = "/devices";
+    alert("Đã thêm loại thiết bị thành công!");
   };
 
   const deleteDevice = async (id) => {
@@ -205,6 +239,53 @@ const ProductsManagement = () => {
     window.location = "/devices";
   };
 
+  const downloadDeviceLogbooks = async (deviceId) => {
+    console.log(deviceId);
+    const response = await fetch(hostDevices + deviceId + "/download-logbooks", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + userDetail.accessToken,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      alert("Tải file thất bại")
+      throw new Error("Failed to download product");
+    }
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `${deviceId}_device-logbook.xlsx`);
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+  };
+
+  const downloadDevices = async () => {
+    const response = await fetch(hostDevices + "download-devices", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + userDetail.accessToken,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      alert("Tải file thất bại")
+      throw new Error("Failed to download product");
+    }
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", 'devices.xlsx');
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+  };
+
   const getDate = (dateString) => {
     const dateObj = new Date(dateString);
 
@@ -271,6 +352,14 @@ const ProductsManagement = () => {
                 Thêm thiết bị
               </Button>
 
+              <Button variant="info" onClick={openDeviceType} className="btn-add">
+                Thêm loại thiết bị
+              </Button>
+
+              <Button variant="info" onClick={downloadDevices} className="btn-add">
+                Xuất file Excel
+              </Button>
+
               <div className="select">
                 <select
                   className="form-select"
@@ -280,7 +369,7 @@ const ProductsManagement = () => {
                   }}
                 >
                   <option value={all}>{all}</option>
-                  {deviceTypes.map((deviceType) => (
+                  {deviceTypes?.map((deviceType) => (
                     <option key={deviceType.id} value={deviceType.type}>
                       {deviceType.type}
                     </option>
@@ -363,6 +452,7 @@ const ProductsManagement = () => {
                           className="btn-update"
                           onClick={() => {
                             getDeviceLogbooks(device.id);
+                            setDeviceId(device.id);
                             console.log(deviceLogbooks);
                             openDeviceLogbooks();
                           }}
@@ -769,6 +859,14 @@ const ProductsManagement = () => {
               <Button variant="secondary" onClick={closeDeviceLogbooks}>
                 Đóng
               </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  downloadDeviceLogbooks(deviceId);
+                }}
+              >
+                Xuất file Excel
+              </Button>
             </Modal.Footer>
           </Modal>
 
@@ -801,6 +899,36 @@ const ProductsManagement = () => {
                   closeLiquidation();
                 }}
               >
+                Xác nhận
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          {/* create device type */}
+          <Modal className="modal" show={showDeviceType} onHide={closeDeviceType}>
+            <Modal.Header closeButton>
+              <Modal.Title>Thêm loại thiết bị</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form>
+                <Form.Group as={Row} className="mp-3">
+                  <Form.Label>Loại thiết bị</Form.Label>
+                  <Form.Control
+                    id="inputLoai"
+                    type="text"
+                    placeholder="Loại thiết bị"
+                    onChange={(e) =>
+                      setDeviceType(e.target.value)
+                    }
+                  />
+                </Form.Group>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={closeDeviceType}>
+                Đóng
+              </Button>
+              <Button variant="primary" onClick={createDeviceType}>
                 Xác nhận
               </Button>
             </Modal.Footer>

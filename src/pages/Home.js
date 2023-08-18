@@ -1,6 +1,6 @@
 import React from "react";
 import DeviceChart from "../components/charts/DeviceChart";
-import LogbookChart from "../components/charts/LogbookChart"
+import LogbookChart from "../components/charts/LogbookChart";
 
 const Home = () => {
   const [userDetail] = React.useState(JSON.parse(localStorage.getItem("auth")));
