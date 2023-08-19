@@ -76,7 +76,7 @@ const UserOrdersDetails = () => {
         gender: profile.gender,
         birthday: profile.birthday ? profile.birthday : undefined,
         address: profile.address,
-        avatar: profile.avatar,
+        // avatar: profile.avatar,
       }),
     });
 
@@ -406,7 +406,7 @@ const UserOrdersDetails = () => {
                   />
                 </Form.Group>
 
-                <Form.Group as={Row} className="mp-3">
+                {/* <Form.Group as={Row} className="mp-3">
                   <Form.Label>Avatar</Form.Label>
                   <Form.Control
                     id="inputAvatar"
@@ -420,7 +420,7 @@ const UserOrdersDetails = () => {
                       });
                     }}
                   />
-                </Form.Group>
+                </Form.Group> */}
               </Form>
             </Modal.Body>
             <Modal.Footer>

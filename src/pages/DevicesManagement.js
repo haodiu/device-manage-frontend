@@ -762,6 +762,7 @@ const ProductsManagement = () => {
                         user: { id: parseInt(e.target.value) },
                       })
                     }
+                    disabled={deviceUpdate.status != "Chưa sử dụng"}
                   >
                     <option
                       key={deviceUpdate.user?.id}
