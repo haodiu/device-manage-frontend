@@ -413,7 +413,7 @@ const ProductsManagement = () => {
                     <th style={{ textAlign: "center" }}></th>
                     <th style={{ width: "100px" }}>Tên</th>
                     <th style={{ width: "60px" }}>Loại</th>
-                    <th style={{ textAlign: "center" }}>Giá (đồng)</th>
+                    <th style={{ textAlign: "center" }}>Giá</th>
                     <th style={{ width: "100px" }}>Nơi đặt</th>
                     <th style={{ width: "80px" }}>Ngày đặt</th>
                     <th style={{ width: "120px" }}>Trạng thái</th>
@@ -439,7 +439,7 @@ const ProductsManagement = () => {
                       </td>
                       <td>{device.name}</td>
                       <td>{device.type.type}</td>
-                      <td>{device.price}</td>
+                      <td>{device.price.toLocaleString('en-US').replace(/,/g, '.')}đ</td>
                       <td>{device.purchaseLocation}</td>
                       <td>{device.purchaseDate}</td>
                       <td>{device.status}</td>
