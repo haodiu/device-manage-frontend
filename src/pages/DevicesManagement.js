@@ -426,7 +426,7 @@ const ProductsManagement = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {devicesByType?.map((device, index) => (
+                  {devicesByType.map((device, index) => (
                     <tr key={index} style={{ verticalAlign: "middle" }}>
                       <td>
                         {

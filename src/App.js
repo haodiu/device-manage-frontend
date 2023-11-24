@@ -18,6 +18,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
+            <Route index element={<Login />} />
             <Route index element={<Home />} />
             <Route path="devices" element={<DevicesManagement />} />
             <Route path="logbooks" element={<LogbooksManagement />} />

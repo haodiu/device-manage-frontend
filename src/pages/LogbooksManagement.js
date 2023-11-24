@@ -47,6 +47,7 @@ const ProductsManagement = () => {
 
   const updateStatusLogbook = async (id) => {
     console.log(logbookStatus + "  " + logbookId);
+
     const response = await fetch(hostLogbooks + id + "/update-status", {
       method: "PUT",
       headers: {
