@@ -133,7 +133,7 @@ const ProductsManagement = () => {
 
   const createDeviceType = async () => {
 
-    const response = await fetch(hostDevices + 'device-type', {
+    const response = await fetch(hostDeviceTypes, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + userDetail.accessToken,
@@ -177,7 +177,7 @@ const ProductsManagement = () => {
 
   const updateDevice = async (id) => {
     console.log(deviceUpdate);
-    const response = await fetch(hostDevices + id + "/update", {
+    const response = await fetch(hostDevices + id, {
       method: "PUT",
       headers: {
         Authorization: "Bearer " + userDetail.accessToken,

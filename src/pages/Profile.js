@@ -63,7 +63,7 @@ const UserOrdersDetails = () => {
 
   const handleUpdateProfile = async () => {
     console.log(profile);
-    const response = await fetch(hostUser + userDetail.id + "/profile", {
+    const response = await fetch(hostUser + userDetail.id, {
       method: "PUT",
       headers: {
         Authorization: "Bearer " + userDetail.accessToken,
