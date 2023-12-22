@@ -4,7 +4,7 @@ import LogbookChart from "../components/charts/LogbookChart";
 
 const Home = () => {
   const [userDetail] = React.useState(JSON.parse(localStorage.getItem("auth")));
-  if (userDetail === null) {
+  if (userDetail === null || userDetail.role !== "maintenance_staff") {
     window.location = "/login";
   }
   return (
