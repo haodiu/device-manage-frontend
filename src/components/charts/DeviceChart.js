@@ -45,9 +45,13 @@ const DeviceChart = () => {
   };
 
   let total = 0;
-  for (let i = 0; i < deviceTypeCount?.length; i++) {
-    total = total + deviceTypeCount[i].amount;
+
+  if (Array.isArray(deviceTypeCount)) {
+    for (const device of deviceTypeCount) {
+      total = total + device.amount;
+    }
   }
+  
   return (
     <>
       <Doughnut data={chartData} />

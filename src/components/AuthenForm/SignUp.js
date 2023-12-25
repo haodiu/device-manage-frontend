@@ -4,7 +4,7 @@ import validate from "../../validations/validateInfo";
 import "./Form.css";
 
 const Signup = ({ submitForm }) => {
-  const signupHost = "http://localhost:3000/api/v1/auth/register";
+  const signupHost = process.env.REACT_APP_HOST_REGISTER;
   const { errors } = useForm(submitForm, validate);
 
   const [email, setEmail] = React.useState("");
@@ -18,7 +18,6 @@ const Signup = ({ submitForm }) => {
     } else {
       submitButton.current.disable = true;
       const userData = { email, password };
-      // console.log(userData);
       let result = await fetch(signupHost, {
         method: "POST",
         headers: {
@@ -27,7 +26,7 @@ const Signup = ({ submitForm }) => {
         body: JSON.stringify(userData),
       })
         .then((res) => {
-          res.json().then((data) => {
+          res.json().then(() => {
             if (res.ok) {
               alert("Đăng kí tài khoản thành công");
               window.location = "/login";

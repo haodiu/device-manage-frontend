@@ -45,8 +45,10 @@ const ProductChart = () => {
   };
 
   let total = 0;
-  for (let i = 0; i < logbookTypeCount?.length; i++) {
-    total = total + logbookTypeCount[i].amount;
+  if (Array.isArray(logbookTypeCount)) {
+    for (const device of logbookTypeCount) {
+      total = total + device.amount;
+    }
   }
   return (
     <>
